@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+input, select {
+  font-size: 15pt !important;
+  height: 45px !important;
+}

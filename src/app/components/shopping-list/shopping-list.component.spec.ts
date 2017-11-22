@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShoppingListComponent } from './shopping-list.component';
-import {ShoppingItem} from "../../models/shopping-item.model";
+import {ShoppingItem} from "../../models/shopping-item/shopping-item.model";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -9,7 +11,12 @@ describe('ShoppingListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingListComponent ]
+      declarations: [ ShoppingListComponent ],
+      imports: [
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   }));
@@ -48,4 +55,12 @@ describe('ShoppingListComponent', () => {
     expect(component.shoppingList).toEqual([]);
     expect(component.itemId).toBe(2);
   });
+
+  it ('should initialize the form correctly', () => {
+    component.initForm();
+    fixture.detectChanges();
+
+    expect(component.shoppingForm).toBeTruthy();
+    expect(component.shoppingForm.get('itemName')).toBeTruthy();
+  })
 });

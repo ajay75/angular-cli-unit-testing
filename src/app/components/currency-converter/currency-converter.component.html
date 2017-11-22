@@ -1,0 +1,39 @@
+<h2>Currency Converter</h2>
+<div class="row">
+  <form [formGroup]="currencyForm">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="source">Source:</label>
+        <div class="row">
+          <div class="col-md-4">
+            <select class="form-control" formControlName="sourceCurrency">
+              <option *ngFor="let currency of currencies" value="{{ currency.code }}">
+                {{ currency.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <input id="source" formControlName="source" class="form-control text-right col-md-8">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="result">Result:</label>
+        <div class="row">
+          <div class="col-md-4">
+            <select class="form-control" formControlName="resultCurrency">
+              <option *ngFor="let currency of currencies" value="{{ currency.code }}">
+                {{ currency.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <input id="result" formControlName="result" readonly class="form-control text-right col-md-8">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
