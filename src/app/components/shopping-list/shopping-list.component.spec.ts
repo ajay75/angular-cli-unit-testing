@@ -62,5 +62,26 @@ describe('ShoppingListComponent', () => {
 
     expect(component.shoppingForm).toBeTruthy();
     expect(component.shoppingForm.get('itemName')).toBeTruthy();
+  });
+
+  it('should add a new item when form is valid', () => {
+    component.initForm();
+    component.shoppingForm.get('itemName').setValue('Milk');
+    component.onFormSave(component.shoppingForm.value);
+    fixture.detectChanges();
+
+    const expectedResult = new ShoppingItem(1, 'Milk');
+    expect(component.shoppingList.length).toBe(1);
+    expect(component.shoppingList[0]).toEqual(expectedResult);
+  });
+
+  it ('should refuse to add new item when form is valid', () => {
+    component.initForm();
+    component.onFormSave(component.shoppingForm.value);
+    fixture.detectChanges();
+
+    expect(component.shoppingList.length).toBe(0);
+    expect(component.shoppingForm.valid).toBeFalsy();
+    expect(component.shoppingForm.get('itemName').touched).toBeTruthy();
   })
 });
